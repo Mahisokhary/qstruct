@@ -3,11 +3,11 @@
 #include <xxhash.h>
 #include <string.h>
 
-static int8_t _comparator(char *x, char *y) {
+static int8_t _comparator(const char *x, const char *y) {
 	return strcmp(x, y);
 }
 
-static long _hasher(char *x, size_t size, long seed) {
+static long _hasher(const char *x, size_t size, long seed) {
 	return XXH64(x, size, seed);
 }
 

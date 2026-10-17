@@ -1,9 +1,9 @@
 #include <test/test.h>
 #include <qstruct/qstruct.h>
 
-static int8_t _int32_comparator(char *xp, char *yp) {
-	int x = *(int *) xp;
-	int y = *(int *) yp;
+static int8_t _int32_comparator(const char *xp, const char *yp) {
+	const int x = *(const int *) xp;
+	const int y = *(const int *) yp;
 	return x - y;
 }
 

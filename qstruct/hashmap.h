@@ -26,7 +26,7 @@ typedef void* qstruct_hashmap_iterator_t;
 /*
  * Hash the given buffer
  */
-typedef long (*qstruct_hashmap_hasher_t)(char *x, size_t size, long seed);
+typedef long (*qstruct_hashmap_hasher_t)(const char *x, size_t size, long seed);
 
 /*
  * Creates a hashmap
@@ -44,7 +44,7 @@ qstruct_result_t qstruct_hashmap_destroy(qstruct_hashmap_t hashmap);
  * Add key and value to the tree
  * Time complexity: O(1) or O(log n) in a bad day
  */
-qstruct_result_t qstruct_hashmap_add(qstruct_hashmap_t hashmap, void *key, size_t key_size, void *value, size_t value_size);
+qstruct_result_t qstruct_hashmap_add(qstruct_hashmap_t hashmap, const void *key, size_t key_size, const void *value, size_t value_size);
 
 /*
  * Get value by key
@@ -53,26 +53,26 @@ qstruct_result_t qstruct_hashmap_add(qstruct_hashmap_t hashmap, void *key, size_
  * if value_size is zero function will set it automatically
  * Time complexity: O(1) or O(log n) in a bad day
  */
-qstruct_result_t qstruct_hashmap_get(qstruct_hashmap_t hashmap, void *key, size_t key_size, void *value, size_t *value_size);
+qstruct_result_t qstruct_hashmap_get(qstruct_hashmap_t hashmap, const void *key, size_t key_size, void *value, size_t *value_size);
 
 /*
  * Gets pointer to the value of the key
  * value_size is ignored if its NULL
  * Time complexity: O(1) or O(log n) in a bad day
  */
-qstruct_result_t qstruct_hashmap_getp(qstruct_hashmap_t hashmap, void *key, size_t key_size, void **value, size_t *value_size);
+qstruct_result_t qstruct_hashmap_getp(qstruct_hashmap_t hashmap, const void *key, size_t key_size, void **value, size_t *value_size);
 
 /*
  * Checks if key exists in the map
  * Time complexity: O(1) or O(log n) in a bad day
  */
-bool qstruct_hashmap_has(qstruct_hashmap_t hashmap, void *key, size_t key_size);
+bool qstruct_hashmap_has(qstruct_hashmap_t hashmap, const void *key, size_t key_size);
 
 /*
  * Removes given key from map
  * Time complexity: O(1) or O(log n) in a bad day
  */
-qstruct_result_t qstruct_hashmap_remove(qstruct_hashmap_t hashmap, void *key, size_t key_size);
+qstruct_result_t qstruct_hashmap_remove(qstruct_hashmap_t hashmap, const void *key, size_t key_size);
 
 /*
  * Returns length of the map

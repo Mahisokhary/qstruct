@@ -29,7 +29,7 @@ qstruct_result_t qstruct_arraylist_create(qstruct_arraylist_t *arraylist, size_t
 	return QSTRUCT_RESULT_OK;
 }
 
-qstruct_result_t qstruct_arraylist_add(qstruct_arraylist_t al, void *value) {
+qstruct_result_t qstruct_arraylist_add(qstruct_arraylist_t al, const void *value) {
 	_ensure_capacity(al);
 	void *dest = al->array + al->length++ * al ->value_size;
 	memcpy(dest, value, al->value_size);
@@ -65,13 +65,13 @@ qstruct_arraylist_t qstruct_arraylist_destroy(qstruct_arraylist_t al) {
 	return QSTRUCT_RESULT_OK;
 }
 
-qstruct_result_t qstruct_arraylist_set(qstruct_arraylist_t al, void *value, size_t index) {
+qstruct_result_t qstruct_arraylist_set(qstruct_arraylist_t al, const void *value, size_t index) {
 	if (index >= al->length) return QSTRUCT_RESULT_INDEX_OUTOF_BOUND;
 	memcpy(al->array + index * al->value_size, value, al->value_size);
 	return QSTRUCT_RESULT_OK;
 }
 
-qstruct_arraylist_t qstruct_arraylist_insert(qstruct_arraylist_t al, void *value, size_t index) {
+qstruct_arraylist_t qstruct_arraylist_insert(qstruct_arraylist_t al, const void *value, size_t index) {
 	_ensure_capacity(al);
 	memmove(al->array + (index + 1) * al->value_size, al->array + index * al->value_size, (al->length - index) * al->value_size);
 	memcpy(al->array + index * al->value_size, value, al->value_size);

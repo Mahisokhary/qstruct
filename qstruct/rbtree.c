@@ -127,7 +127,7 @@ _rbt_fix_add_recolor:
  * Finds a node and return a pointer to it
  * Returns NULL if node not found
  */
-struct node *_rbt_find_node(qstruct_rbtree_t t, void *value) {
+struct node *_rbt_find_node(qstruct_rbtree_t t, const void *value) {
 	qstruct_rbtree_comparator_t comparator = t->comparator;
 	struct node *n = t->root;
 	while (n != NULL) {
@@ -148,7 +148,7 @@ qstruct_result_t qstruct_rbtree_create(qstruct_rbtree_t *tree, qstruct_rbtree_co
 	return QSTRUCT_RESULT_OK;
 }
 
-qstruct_result_t qstruct_rbtree_add(qstruct_rbtree_t t, void *value, size_t value_size) {
+qstruct_result_t qstruct_rbtree_add(qstruct_rbtree_t t, const void *value, size_t value_size) {
 	qstruct_rbtree_comparator_t comparator = t->comparator;
 
 	struct node *current = t->root;
@@ -206,7 +206,7 @@ qstruct_result_t qstruct_rbtree_getp(qstruct_rbtree_t t, void **value, size_t *v
 	return QSTRUCT_RESULT_OK;
 }
 
-bool qstruct_rbtree_has(qstruct_rbtree_t tree, void *value) {
+bool qstruct_rbtree_has(qstruct_rbtree_t tree, const void *value) {
 	qstruct_rbtree_t t = tree;
 	return _rbt_find_node(t, value) != NULL;
 }
@@ -395,7 +395,7 @@ static inline void _rbt_remove_node(qstruct_rbtree_t t, struct node *v) {
 	_rbt_remove_node(t, u);
 }
 
-qstruct_result_t qstruct_rbtree_remove(qstruct_rbtree_t t, void *value) {
+qstruct_result_t qstruct_rbtree_remove(qstruct_rbtree_t t, const void *value) {
 	struct node *n = _rbt_find_node(t, value);
 	if (n == NULL) return QSTRUCT_RESULT_VALUE_NOT_FOUND;
 	_rbt_remove_node(t, n);

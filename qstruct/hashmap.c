@@ -33,9 +33,9 @@ struct iterator {
 /*
  * Compares two entries
  */
-static int8_t _hm_entry_comparator(char *x, char *y) {
-	struct entry *e1 = (void *) x;
-	struct entry *e2 = (void *) y;
+static int8_t _hm_entry_comparator(const char *x, const char *y) {
+	const struct entry *e1 = (const void *) x;
+	const struct entry *e2 = (const void *) y;
 	return e1->map->comparator(e1->key, e2->key);
 }
 
@@ -103,7 +103,7 @@ static inline qstruct_result_t _hm_ensure_loadfactor(qstruct_hashmap_t hm) {
 /*
  * Finds and returns entry of the given key
  */
-static inline qstruct_result_t _hm_get(qstruct_hashmap_t hm, struct entry **e, char *key, size_t key_size) {
+static inline qstruct_result_t _hm_get(qstruct_hashmap_t hm, struct entry **e, const char *key, size_t key_size) {
 	qstruct_rbtree_t bucket = hm->buckets[HM_BUCKET_INDEX(key, key_size, hm)];
 	if (bucket == NULL) return QSTRUCT_RESULT_KEY_NOT_FOUND;
 
@@ -165,7 +165,7 @@ qstruct_result_t qstruct_hashmap_destroy(qstruct_hashmap_t hm) {
 	return QSTRUCT_RESULT_OK;
 }
 
-qstruct_result_t qstruct_hashmap_add(qstruct_hashmap_t hm, void *key, size_t key_size, void *value, size_t value_size) {
+qstruct_result_t qstruct_hashmap_add(qstruct_hashmap_t hm, const void *key, size_t key_size, const void *value, size_t value_size) {
 	qstruct_run(_hm_ensure_loadfactor(hm));
 
 	struct entry *e = malloc(sizeof(struct entry) + key_size);
@@ -185,7 +185,7 @@ qstruct_result_t qstruct_hashmap_add(qstruct_hashmap_t hm, void *key, size_t key
 	return QSTRUCT_RESULT_OK;
 }
 
-qstruct_result_t qstruct_hashmap_get(qstruct_hashmap_t hm, void *key, size_t key_size, void *value, size_t *value_size) {
+qstruct_result_t qstruct_hashmap_get(qstruct_hashmap_t hm, const void *key, size_t key_size, void *value, size_t *value_size) {
 	void *src;
 	size_t rvalue_size;
 	qstruct_run(qstruct_hashmap_getp(hm, key, key_size, &src, &rvalue_size));
@@ -195,7 +195,7 @@ qstruct_result_t qstruct_hashmap_get(qstruct_hashmap_t hm, void *key, size_t key
 	return QSTRUCT_RESULT_OK;
 }
 
-qstruct_result_t qstruct_hashmap_getp(qstruct_hashmap_t hm, void *key, size_t key_size, void **value, size_t *value_size) {
+qstruct_result_t qstruct_hashmap_getp(qstruct_hashmap_t hm, const void *key, size_t key_size, void **value, size_t *value_size) {
 	struct entry *e;
 	qstruct_run(_hm_get(hm, &e, key, key_size));
 	*value = e->value;
@@ -203,12 +203,12 @@ qstruct_result_t qstruct_hashmap_getp(qstruct_hashmap_t hm, void *key, size_t ke
 	return QSTRUCT_RESULT_OK;
 }
 
-bool qstruct_hashmap_has(qstruct_hashmap_t hm, void *key, size_t key_size) {
+bool qstruct_hashmap_has(qstruct_hashmap_t hm, const void *key, size_t key_size) {
 	struct entry *e;
 	return _hm_get(hm, &e, key, key_size) == QSTRUCT_RESULT_OK;
 }
 
-qstruct_result_t qstruct_hashmap_remove(qstruct_hashmap_t hm, void *key, size_t key_size) {
+qstruct_result_t qstruct_hashmap_remove(qstruct_hashmap_t hm, const void *key, size_t key_size) {
 	struct entry *e;
 	qstruct_run(_hm_get(hm, &e, key, key_size));
 	long bucket_index = HM_BUCKET_INDEX(key, key_size, hm);

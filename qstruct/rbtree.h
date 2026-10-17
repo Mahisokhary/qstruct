@@ -23,7 +23,7 @@ typedef struct qstruct_rbtree_iterator* qstruct_rbtree_iterator_t;
  * 0: values are equal
  * 1: x is bigger than y
  */
-typedef int8_t (*qstruct_rbtree_comparator_t)(char *x, char *y);
+typedef int8_t (*qstruct_rbtree_comparator_t)(const char *x, const char *y);
 
 /*
  * Creates a red-black tree
@@ -34,7 +34,7 @@ qstruct_result_t qstruct_rbtree_create(qstruct_rbtree_t *tree, qstruct_rbtree_co
  * Adds given value to the tree
  * Time complexity: O(log n)
  */
-qstruct_result_t qstruct_rbtree_add(qstruct_rbtree_t tree, void *value, size_t value_size);
+qstruct_result_t qstruct_rbtree_add(qstruct_rbtree_t tree, const void *value, size_t value_size);
 
 /*
  * Gets value in of node in tree
@@ -59,13 +59,13 @@ qstruct_result_t qstruct_rbtree_getp(qstruct_rbtree_t tree, void **value, size_t
  * Checks if the value exists in tree
  * Time complexity: O(log n)
  */
-bool qstruct_rbtree_has(qstruct_rbtree_t tree, void *value);
+bool qstruct_rbtree_has(qstruct_rbtree_t tree, const void *value);
 
 /*
  * Removes given value from tree
  * Time complexity: O(log n)
  */
-qstruct_result_t qstruct_rbtree_remove(qstruct_rbtree_t tree, void *value);
+qstruct_result_t qstruct_rbtree_remove(qstruct_rbtree_t tree, const void *value);
 
 /*
  * Destroys the tree

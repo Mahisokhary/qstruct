@@ -19,7 +19,7 @@ qstruct_result_t qstruct_linkedlist_create(qstruct_linkedlist_t *list);
  * Adds value to end of the list
  * Time complexity: O(1)
  */
-qstruct_result_t qstruct_linkedlist_add(qstruct_linkedlist_t list, void *value, size_t value_size);
+qstruct_result_t qstruct_linkedlist_add(qstruct_linkedlist_t list, const void *value, size_t value_size);
 
 /*
  * Gets pointer of value at given index
@@ -61,12 +61,12 @@ qstruct_result_t qstruct_linkedlist_clear(qstruct_linkedlist_t list);
  * Replace value at given index with given value
  * Time complexity: O(n)
  */
-qstruct_result_t qstruct_linkedlist_replace(qstruct_linkedlist_t list, size_t index, void *value, size_t value_size);
+qstruct_result_t qstruct_linkedlist_replace(qstruct_linkedlist_t list, size_t index, const void *value, size_t value_size);
 
 /*
  * Insert value at given index
  */
-qstruct_result_t qstruct_linkedlist_insert(qstruct_linkedlist_t list, size_t index, void *value, size_t value_size);
+qstruct_result_t qstruct_linkedlist_insert(qstruct_linkedlist_t list, size_t index, const void *value, size_t value_size);
 
 #ifdef __cplusplus
 }
