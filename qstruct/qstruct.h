@@ -19,6 +19,11 @@ typedef enum {
 	QSTRUCT_RESULT_KEY_NOT_FOUND = 3,	// requested key not found
 } qstruct_result_t;
 
+/*
+ * Returns qstruct result enum constants as string
+ */
+const char *qstruct_result_string(qstruct_result_t res);
+
 #ifdef __cplusplus
 }
 #endif
