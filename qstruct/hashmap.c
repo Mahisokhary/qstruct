@@ -177,7 +177,7 @@ qstruct_result_t qstruct_hashmap_add(qstruct_hashmap_t hm, const void *key, size
 	e->key_size = key_size;
 
 	memcpy(e->key, key, key_size);
-	memcpy(e->value, value, value_size);
+	if (value) memcpy(e->value, value, value_size);
 
 	qstruct_run(_hm_put(hm, e));
 	free(e);

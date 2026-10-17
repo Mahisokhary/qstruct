@@ -43,6 +43,7 @@ qstruct_result_t qstruct_hashmap_destroy(qstruct_hashmap_t hashmap);
 /*
  * Add key and value to the tree
  * Time complexity: O(1) or O(log n) in a bad day
+ * value: if null value will remain un initialized
  */
 qstruct_result_t qstruct_hashmap_add(qstruct_hashmap_t hashmap, const void *key, size_t key_size, const void *value, size_t value_size);
 
